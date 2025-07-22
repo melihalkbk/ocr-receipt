@@ -1,0 +1,29 @@
+name: receipt_ocr_web
+description: Fiş OCR ve harcama takibi uygulaması
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '^3.8.0'
+  flutter: '>=3.10.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.0
+  file_picker: ^6.1.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  tesseract_ocr: ^0.5.0 # Mobil için
+  js: ^0.6.7 # Web için
+  fl_chart: ^0.66.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  hive_generator: ^2.0.0
+  build_runner: ^2.4.0
+
+flutter:
+  uses-material-design: true 
