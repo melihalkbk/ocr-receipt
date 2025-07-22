@@ -1,0 +1,56 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/app.flx
+ios/Flutter/app.zip
+ios/Flutter/flutter_assets/
+ios/ServiceDefinitions.json
+macos/Flutter/ephemeral/
+macos/Flutter/GeneratedPluginRegistrant.swift
+macos/Flutter/GeneratedPluginRegistrant.m
+macos/Flutter/GeneratedPluginRegistrant.h
+*.iml
+
+# Android related
+android/.gradle/
+android/captures/
+android/.idea/
+android/local.properties
+android/app/debug
+android/app/profile
+android/app/release
+
+# Xcode related
+*.xcworkspace
+*.xcuserstate
+*.xcuserdata
+*.lock
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Others
+*.log
+*.tmp
+*.swp
+*.DS_Store
+
+# Hive/SQLite/Local DB
+*.hive
+*.db
+
+.flutter-plugins-dependencies
+.metadata
