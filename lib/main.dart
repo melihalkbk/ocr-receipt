@@ -27,7 +27,7 @@ class ReceiptOCRApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Fiş OCR ve Harcama Takibi',
+        title: 'Receipt OCR & Expense Tracker',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: const Color(0xFFF7F8FA),
@@ -78,7 +78,7 @@ class HomeView extends StatelessWidget {
     if (categoryTotals.isEmpty) return '-';
     final sorted = categoryTotals.entries.toList()
       ..sort((a, b) => b.value.compareTo(a.value));
-    return '${sorted.first.key} (${sorted.first.value.toStringAsFixed(2)} TL)';
+    return '${sorted.first.key} ( ${sorted.first.value.toStringAsFixed(2)})';
   }
 
   ReceiptItem? getMostExpensiveItem(List<Receipt> receipts) {
@@ -112,7 +112,7 @@ class HomeView extends StatelessWidget {
 
   Widget buildCategoryPieChart(Map<String, double> data) {
     if (data.isEmpty) {
-      return const Center(child: Text('Kategori verisi yok.'));
+      return const Center(child: Text('No category data.'));
     }
     final colors = [
       Colors.blue,
@@ -164,7 +164,7 @@ class HomeView extends StatelessWidget {
     final total = receipts.fold<double>(0, (sum, r) => sum + r.total);
     final categoryTotals = getCategoryTotals(receipts);
     return Scaffold(
-      appBar: AppBar(title: const Text('Fişlerim')),
+      appBar: AppBar(title: const Text('My Receipts')),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
         child: Column(
@@ -186,14 +186,14 @@ class HomeView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Toplam Harcama',
+                            'Total Spending',
                             style: TextStyle(
                               color: Colors.grey[700],
                               fontSize: 14,
                             ),
                           ),
                           Text(
-                            '${total.toStringAsFixed(2)} TL',
+                            ' ${total.toStringAsFixed(2)}',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 22,
@@ -206,7 +206,7 @@ class HomeView extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          'Fiş Sayısı',
+                          'Receipt Count',
                           style: TextStyle(
                             color: Colors.grey[700],
                             fontSize: 14,
@@ -238,7 +238,7 @@ class HomeView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              'En Çok Harcanan Kategori',
+                              'Top Spending Category',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
@@ -263,7 +263,7 @@ class HomeView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              'En Pahalı Ürün',
+                              'Most Expensive Product',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
@@ -275,7 +275,7 @@ class HomeView extends StatelessWidget {
                                 final item = getMostExpensiveItem(receipts);
                                 if (item == null) return const Text('-');
                                 return Text(
-                                  '${item.name} (${item.price.toStringAsFixed(2)} TL)',
+                                  '${item.name} ( ${item.price.toStringAsFixed(2)})',
                                   style: const TextStyle(fontSize: 16),
                                 );
                               },
@@ -295,7 +295,7 @@ class HomeView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Kategoriye Göre Harcama Dağılımı',
+                        'Spending Distribution by Category',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -320,12 +320,12 @@ class HomeView extends StatelessWidget {
                       ),
                       const SizedBox(height: 24),
                       const Text(
-                        'Henüz hiç fiş eklemediniz.',
+                        'No receipts yet.',
                         style: TextStyle(fontSize: 20, color: Colors.black54),
                       ),
                       const SizedBox(height: 8),
                       const Text(
-                        'Sağ alttan yeni bir fiş ekleyebilirsiniz.',
+                        'You can add a new receipt from the bottom right.',
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -343,11 +343,11 @@ class HomeView extends StatelessWidget {
                       child: ListTile(
                         leading: const Icon(Icons.receipt, color: Colors.blue),
                         title: Text(
-                          'Tarih: ${receipt.date.toLocal().toString().split(' ')[0]}',
+                          'Date: ${receipt.date.toLocal().toString().split(' ')[0]}',
                           style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
                         subtitle: Text(
-                          'Toplam: ${receipt.total.toStringAsFixed(2)} TL',
+                          'Total:  ${receipt.total.toStringAsFixed(2)}',
                         ),
                         trailing: const Icon(Icons.chevron_right),
                         onTap: () async {
@@ -359,7 +359,7 @@ class HomeView extends StatelessWidget {
                                   provider.updateReceipt(updatedReceipt);
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                      content: Text('Fiş güncellendi!'),
+                                      content: Text('Receipt updated!'),
                                     ),
                                   );
                                 },
@@ -383,12 +383,12 @@ class HomeView extends StatelessWidget {
           if (result is Receipt) {
             provider.addReceipt(result);
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Fiş başarıyla eklendi!')),
+              const SnackBar(content: Text('Receipt added successfully!')),
             );
           }
         },
         icon: const Icon(Icons.add_a_photo),
-        label: const Text('Fiş Ekle'),
+        label: const Text('Add Receipt'),
       ),
     );
   }
