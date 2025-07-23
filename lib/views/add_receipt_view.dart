@@ -41,7 +41,7 @@ class _AddReceiptViewState extends State<AddReceiptView> {
       if (bytes == null) {
         setState(() {
           _isLoading = false;
-          _error = 'Görsel okunamadı.';
+          _error = 'Image could not be read.';
         });
         return;
       }
@@ -60,7 +60,7 @@ class _AddReceiptViewState extends State<AddReceiptView> {
     } catch (e) {
       setState(() {
         _isLoading = false;
-        _error = 'Hata: $e';
+        _error = 'Error: $e';
       });
     }
   }
@@ -72,12 +72,12 @@ class _AddReceiptViewState extends State<AddReceiptView> {
         Icon(Icons.cloud_upload, size: 100, color: Colors.blue[100]),
         const SizedBox(height: 24),
         const Text(
-          'Fiş Fotoğrafı Yükle',
+          'Upload Receipt Image',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         const Text(
-          'Market veya restoran fişinin net bir fotoğrafını yükleyin. Fotoğrafın düz ve okunaklı olmasına dikkat edin.',
+          'Upload a clear photo of your market or restaurant receipt. Make sure the image is straight and readable.',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black54),
         ),
@@ -89,7 +89,7 @@ class _AddReceiptViewState extends State<AddReceiptView> {
           ),
           onPressed: _isLoading ? null : pickImageAndRecognize,
           icon: const Icon(Icons.upload_file),
-          label: const Text('Görsel Yükle ve OCR'),
+          label: const Text('Upload Image & OCR'),
         ),
       ],
     );
@@ -113,27 +113,27 @@ class _AddReceiptViewState extends State<AddReceiptView> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Tarih: ${receipt.date.toLocal().toString().split(' ')[0]}',
+                  'Date: ${receipt.date.toLocal().toString().split(' ')[0]}',
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
                 const Spacer(),
                 const Icon(Icons.attach_money, size: 18, color: Colors.green),
                 const SizedBox(width: 4),
                 Text(
-                  'Toplam: ${receipt.total.toStringAsFixed(2)} TL',
+                  'Total: ${receipt.total.toStringAsFixed(2)}',
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
               ],
             ),
             const Divider(height: 24),
             const Text(
-              'Ürünler:',
+              'Products:',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             ...receipt.items.isEmpty
                 ? [
                     const Text(
-                      'Ürün bulunamadı.',
+                      'No products found.',
                       style: TextStyle(color: Colors.grey),
                     ),
                   ]
@@ -149,7 +149,7 @@ class _AddReceiptViewState extends State<AddReceiptView> {
                         style: const TextStyle(color: Colors.blueGrey),
                       ),
                       trailing: Text(
-                        '${item.price.toStringAsFixed(2)} TL',
+                        '${item.price.toStringAsFixed(2)}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -164,7 +164,7 @@ class _AddReceiptViewState extends State<AddReceiptView> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Fiş Ekle & OCR')),
+      appBar: AppBar(title: const Text('Add Receipt & OCR')),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -217,7 +217,7 @@ class _AddReceiptViewState extends State<AddReceiptView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'OCR Sonucu:',
+                            'OCR Result:',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -236,7 +236,7 @@ class _AddReceiptViewState extends State<AddReceiptView> {
                 if (_parsedReceipt != null) ...[
                   const SizedBox(height: 24),
                   const Text(
-                    'Fişten Ayrıştırılanlar:',
+                    'Parsed from Receipt:',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   _buildParsedReceipt(_parsedReceipt!),
@@ -254,13 +254,13 @@ class _AddReceiptViewState extends State<AddReceiptView> {
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(32)),
                         ),
                         elevation: 4,
                       ),
                       icon: const Icon(Icons.save, size: 28),
-                      label: const Text('Fişi Kaydet'),
+                      label: const Text('Save Receipt'),
                       onPressed: () {
                         Navigator.of(context).pop(_parsedReceipt);
                       },
